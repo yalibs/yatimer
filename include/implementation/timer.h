@@ -29,6 +29,7 @@ namespace ya {
     class timer {
     private:
         using clock = std::chrono::high_resolution_clock;
+        using us = std::chrono::duration<T, std::micro>;
         using ms = std::chrono::duration<T, std::milli>;
         using sec = std::chrono::duration<T, std::chrono::seconds>;
 
@@ -42,13 +43,17 @@ namespace ya {
         clock::duration time_elapsed() const {
             return clock::now() - epoch;
         }
+        T microseconds_elapsed() const {
+            us my_us = std::chrono::duration_cast<us>(time_elapsed());
+            return my_us.count();
+        }
         T milliseconds_elapsed() const {
             ms my_ms = std::chrono::duration_cast<ms>(time_elapsed());
             return my_ms.count();
         }
         T seconds_elapsed() const {
-            ms my_s = std::chrono::duration_cast<ms>(time_elapsed());
-            return my_s.count() / 1000;
+            sec my_s = std::chrono::duration_cast<sec>(time_elapsed());
+            return my_s.count();
         }
     };
 }
