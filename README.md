@@ -14,3 +14,5 @@ ya::timer<int> t{}; // construct the timer
 /* Do something that takes some time */
 auto ms = t.milliseconds_elapsed(); // fetch milliseconds since you started
 ```
+
+hdjwak
